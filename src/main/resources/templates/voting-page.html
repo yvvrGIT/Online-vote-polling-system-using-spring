@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1>Vote for Your Candidate</h1>
+    <table class="table mt-3">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Candidate Name</th>
+            <th scope="col">Party</th>
+            <th scope="col">Party Image</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Age</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Loop through candidates -->
+        <tr th:each="candidate : ${candidates}">
+            <td th:text="${candidate.name}"></td>
+            <td th:text="${candidate.party.name}"></td>
+            <td>
+                <img th:src="@{${candidate.party.image}}" alt="Party Image" style="max-width: 100px; max-height: 100px;">
+            </td>
+            <td th:text="${candidate.gender}"></td>
+            <td th:text="${candidate.age}"></td>
+            <td>
+                <form method="post" th:action="@{/cast-vote}">
+                    <input type="hidden" name="id" th:value="${candidate.id}">
+                    <button type="submit" class="btn btn-primary">Vote</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

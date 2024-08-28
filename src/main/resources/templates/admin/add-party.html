@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Party</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Add Party</h2>
+    <form method="post" th:object="${party}" th:action="@{/admin/add-party}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" th:field="*{name}">
+            <div th:if="${partyexists}" class="text-danger">
+                Username already exists
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="slogan">Slogan:</label>
+            <input type="text" class="form-control" id="slogan" name="slogan" th:field="*{slogan}">
+        </div>
+        <div class="form-group">
+            <label for="photo">Image:</label>
+            <input type="file" class="form-control-file" id="photo" name="photo">
+            <input type="hidden" name="image" th:field="*{image}" th:value="${'null'}">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>
